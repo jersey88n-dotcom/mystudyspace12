@@ -52,12 +52,12 @@ export function StatusSelect({
 }: {
   value: string;
   onChange: (v: S) => void;
-  disabled?: boolean;
+  disabled?: boolean | undefined;
   className?: string;
 }) {
   const s = asStatus(value);
   return (
-    <Select value={s} onValueChange={(v) => onChange(v as S)} disabled={disabled}>
+    <Select value={s} onValueChange={(v) => onChange(v as S)} disabled={!!disabled}>
       <SelectTrigger
         aria-label="Change status"
         className={cn("h-8 w-[150px] gap-2 rounded-full bg-surface text-xs", className)}

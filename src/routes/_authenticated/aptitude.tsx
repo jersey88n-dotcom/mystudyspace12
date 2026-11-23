@@ -25,7 +25,7 @@ const config: QuestionsConfig = {
 
 export const Route = createFileRoute("/_authenticated/aptitude")({
   validateSearch: (s: Record<string, unknown>): { q?: string } =>
-    typeof s.q === "string" && s.q ? { q: s.q } : {},
+    typeof s["q"] === "string" && s["q"] ? { q: s["q"] } : {},
   loader: ({ context }) => context.queryClient.ensureQueryData(aptitudeQuery),
   pendingComponent: () => <ListSkeleton />,
   head: () => ({

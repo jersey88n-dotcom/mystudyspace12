@@ -63,7 +63,7 @@ export type QuestionsConfig = {
 
 const DIFF_ORDER: Record<string, number> = { Easy: 0, Medium: 1, Hard: 2 };
 
-export function QuestionsPage({ config, rows, initialQuery }: { config: QuestionsConfig; rows: QuestionRow[]; initialQuery?: string }) {
+export function QuestionsPage({ config, rows, initialQuery }: { config: QuestionsConfig; rows: QuestionRow[]; initialQuery?: string | undefined }) {
   const queryClient = useQueryClient();
   const [group, setGroup] = useState("all");
   const [search, setSearch] = useState(initialQuery ?? "");
@@ -354,7 +354,7 @@ function QuestionForm({
         explanation: form.explanation.trim() || null,
         notes: form.notes.trim() || null,
       };
-      if (config.hasCode) payload.code = form.code.replace(/\s+$/, "") || null;
+      if (config.hasCode) payload["code"] = form.code.replace(/\s+$/, "") || null;
       if (row) {
         const { error: e } = await supabase.from(config.table).update(payload as never).eq("id", row.id);
         if (e) throw e;

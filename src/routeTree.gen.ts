@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedAptitudeRouteImport } from './routes/_authenticated/aptitude'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedDocumentsRouteImport } from './routes/_authenticated/documents'
 import { Route as AuthenticatedProgrammingRouteImport } from './routes/_authenticated/programming'
 import { Route as AuthenticatedVideosRouteImport } from './routes/_authenticated/videos'
@@ -42,6 +43,11 @@ const AuthenticatedAptitudeRoute = AuthenticatedAptitudeRouteImport.update({
   path: '/aptitude',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDocumentsRoute = AuthenticatedDocumentsRouteImport.update({
   id: '/documents',
   path: '/documents',
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/aptitude': typeof AuthenticatedAptitudeRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/documents': typeof AuthenticatedDocumentsRoute
   '/programming': typeof AuthenticatedProgrammingRoute
   '/videos': typeof AuthenticatedVideosRoute
@@ -73,6 +80,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/aptitude': typeof AuthenticatedAptitudeRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/documents': typeof AuthenticatedDocumentsRoute
   '/programming': typeof AuthenticatedProgrammingRoute
   '/videos': typeof AuthenticatedVideosRoute
@@ -84,6 +92,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/aptitude': typeof AuthenticatedAptitudeRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/documents': typeof AuthenticatedDocumentsRoute
   '/_authenticated/programming': typeof AuthenticatedProgrammingRoute
   '/_authenticated/videos': typeof AuthenticatedVideosRoute
@@ -95,6 +104,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/aptitude'
+    | '/dashboard'
     | '/documents'
     | '/programming'
     | '/videos'
@@ -104,6 +114,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/aptitude'
+    | '/dashboard'
     | '/documents'
     | '/programming'
     | '/videos'
@@ -114,6 +125,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/_authenticated/aptitude'
+    | '/_authenticated/dashboard'
     | '/_authenticated/documents'
     | '/_authenticated/programming'
     | '/_authenticated/videos'
@@ -163,6 +175,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAptitudeRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/documents': {
       id: '/_authenticated/documents'
       path: '/documents'
@@ -189,6 +208,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAptitudeRoute: typeof AuthenticatedAptitudeRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDocumentsRoute: typeof AuthenticatedDocumentsRoute
   AuthenticatedProgrammingRoute: typeof AuthenticatedProgrammingRoute
   AuthenticatedVideosRoute: typeof AuthenticatedVideosRoute
@@ -196,6 +216,7 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAptitudeRoute: AuthenticatedAptitudeRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDocumentsRoute: AuthenticatedDocumentsRoute,
   AuthenticatedProgrammingRoute: AuthenticatedProgrammingRoute,
   AuthenticatedVideosRoute: AuthenticatedVideosRoute,

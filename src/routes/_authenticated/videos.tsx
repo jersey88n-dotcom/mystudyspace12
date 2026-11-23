@@ -44,7 +44,7 @@ import { getYouTubeId, isValidHttpUrl, youTubeEmbed, youTubeThumb } from "@/lib/
 
 export const Route = createFileRoute("/_authenticated/videos")({
   validateSearch: (s: Record<string, unknown>): { q?: string } =>
-    typeof s.q === "string" && s.q ? { q: s.q } : {},
+    typeof s["q"] === "string" && s["q"] ? { q: s["q"] } : {},
   loader: ({ context }) => context.queryClient.ensureQueryData(tutorialsQuery),
   pendingComponent: () => <ListSkeleton />,
   head: () => ({
@@ -300,7 +300,7 @@ function VideoForm({ row, existing, onClose, onSaved }: { row: TutorialRow | nul
       const base = { title: t.slice(0, 200), description: description.trim() || null, category: category.trim(), allow_download: allowDownload };
       if (row) {
         const patch: Record<string, unknown> = { ...base };
-        if (row.source_type !== "upload") patch.url = url.trim();
+        if (row.source_type !== "upload") patch["url"] = url.trim();
         const { error: upErr } = await supabase.from("tutorials").update(patch as never).eq("id", row.id);
         if (upErr) throw upErr;
         await logActivity({ section: "tutorials", item_id: row.id, item_title: t, action: "updated" });

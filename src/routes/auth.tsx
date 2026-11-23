@@ -44,10 +44,10 @@ function AuthPage() {
 
   function validate(): boolean {
     const e: Record<string, string> = {};
-    if (!EMAIL_RE.test(email.trim())) e.email = "Enter a valid email address.";
+    if (!EMAIL_RE.test(email.trim())) e["email"] = "Enter a valid email address.";
     if (mode !== "forgot") {
-      if (password.length < 8) e.password = "Password must be at least 8 characters.";
-      if (mode === "signup" && password !== confirm) e.confirm = "Passwords do not match.";
+      if (password.length < 8) e["password"] = "Password must be at least 8 characters.";
+      if (mode === "signup" && password !== confirm) e["confirm"] = "Passwords do not match.";
     }
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -134,7 +134,7 @@ function AuthPage() {
                 <Mail className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
                 <Input id="email" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} className="h-11 pl-9" placeholder="you@example.com" />
               </div>
-              <FieldError message={errors.email} />
+              <FieldError message={errors["email"]} />
             </div>
             {mode !== "forgot" ? (
               <div>
@@ -150,14 +150,14 @@ function AuthPage() {
                   <LockKeyhole className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
                   <Input id="password" type="password" autoComplete={mode === "signup" ? "new-password" : "current-password"} value={password} onChange={(e) => setPassword(e.target.value)} className="h-11 pl-9" placeholder="At least 8 characters" />
                 </div>
-                <FieldError message={errors.password} />
+                <FieldError message={errors["password"]} />
               </div>
             ) : null}
             {mode === "signup" ? (
               <div>
                 <Label htmlFor="confirm">Confirm password</Label>
                 <Input id="confirm" type="password" autoComplete="new-password" value={confirm} onChange={(e) => setConfirm(e.target.value)} className="mt-1.5 h-11" />
-                <FieldError message={errors.confirm} />
+                <FieldError message={errors["confirm"]} />
               </div>
             ) : null}
             <Button type="submit" size="lg" disabled={busy} className="mt-1 h-11">

@@ -64,7 +64,7 @@ import {
 
 export const Route = createFileRoute("/_authenticated/documents")({
   validateSearch: (s: Record<string, unknown>): { q?: string } =>
-    typeof s.q === "string" && s.q ? { q: s.q } : {},
+    typeof s["q"] === "string" && s["q"] ? { q: s["q"] } : {},
   loader: ({ context }) => context.queryClient.ensureQueryData(documentsQuery),
   pendingComponent: () => <ListSkeleton />,
   head: () => ({

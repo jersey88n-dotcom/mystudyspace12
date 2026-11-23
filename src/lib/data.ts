@@ -126,8 +126,8 @@ export async function uploadFileWithProgress(
   const { data } = await supabase.auth.getSession();
   const token = data.session?.access_token;
   if (!token) throw new Error("Your session expired. Please sign in again.");
-  const base = String(import.meta.env.VITE_SUPABASE_URL).replace(/\/+$/, "");
-  const key = String(import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY);
+  const base = String(import.meta.env["VITE_SUPABASE_URL"]).replace(/\/+$/, "");
+  const key = String(import.meta.env["VITE_SUPABASE_PUBLISHABLE_KEY"]);
   const encoded = path.split("/").map(encodeURIComponent).join("/");
 
   await new Promise<void>((resolve, reject) => {
